@@ -1,0 +1,1842 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DentaCare - Частная стоматологическая клиника</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1D9E75;
+            --primary-hover: #157e5d;
+            --bg-color: #E1F5EE;
+            --white: #ffffff;
+            --text-dark: #2c3e50;
+            --text-light: #546e7a;
+            --shadow: 0 4px 20px rgba(29, 158, 117, 0.08);
+            --transition: all 0.3s ease;
+            --border-radius: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-dark);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* HEADER */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .logo svg {
+            width: 32px;
+            height: 32px;
+            fill: var(--primary);
+        }
+
+        nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            cursor: pointer;
+            padding: 5px 0;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background-color: var(--primary);
+            transition: var(--transition);
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary);
+        }
+
+        nav a.active::after {
+            width: 100%;
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .search-box {
+            position: relative;
+        }
+
+        .search-box input {
+            padding: 10px 15px;
+            padding-right: 35px;
+            border: 1px solid #cce8de;
+            background: #f4fbf8;
+            border-radius: 20px;
+            outline: none;
+            width: 220px;
+            transition: var(--transition);
+            color: var(--text-dark);
+        }
+
+        .search-box input:focus {
+            border-color: var(--primary);
+            background: var(--white);
+            width: 260px;
+            box-shadow: 0 0 0 3px rgba(29, 158, 117, 0.1);
+        }
+
+        .lang-switch {
+            display: flex;
+            background: #f0f4f2;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid #cce8de;
+        }
+
+        .lang-switch button {
+            border: none;
+            background: transparent;
+            padding: 8px 12px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+            color: var(--text-light);
+            transition: var(--transition);
+        }
+
+        .lang-switch button.active {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        /* MAIN CONTENT */
+        main {
+            flex: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            width: 100%;
+        }
+
+        .view-section {
+            display: none;
+            animation: fadeIn 0.4s ease-out forwards;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        .view-section.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* HERO SECTION */
+        .hero {
+            text-align: center;
+            background: var(--white);
+            padding: 60px 20px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 40px;
+            border: 1px solid rgba(29, 158, 117, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background: rgba(29, 158, 117, 0.05);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -80px;
+            right: -50px;
+            width: 300px;
+            height: 300px;
+            background: rgba(29, 158, 117, 0.03);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .hero > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 46px;
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--text-light);
+            margin-bottom: 35px;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--white);
+            padding: 14px 32px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 15px rgba(29, 158, 117, 0.3);
+        }
+
+        .btn:hover {
+            background: var(--primary-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(29, 158, 117, 0.4);
+        }
+
+        /* CARDS GRID */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            text-align: center;
+            padding: 30px 20px;
+            border: 1px solid rgba(29, 158, 117, 0.05);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(29, 158, 117, 0.12);
+            border-color: rgba(29, 158, 117, 0.2);
+        }
+
+        .card img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 4px solid #f4fbf8;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover img {
+            transform: scale(1.05);
+        }
+
+        .card h3 {
+            font-size: 20px;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        .card p.spec {
+            color: var(--primary);
+            font-weight: 500;
+            margin-bottom: 20px;
+            font-size: 14px;
+            background: #f4fbf8;
+            padding: 5px 12px;
+            border-radius: 15px;
+            display: inline-block;
+        }
+
+        .card-btn {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            width: 100%;
+            margin-top: auto;
+        }
+
+        .card-btn:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        /* SERVICES LIST */
+        .service-card {
+            background: var(--white);
+            padding: 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            transition: var(--transition);
+            border: 1px solid rgba(29, 158, 117, 0.05);
+        }
+
+        .service-card:hover {
+            transform: translateX(5px);
+            border-color: rgba(29, 158, 117, 0.2);
+            box-shadow: 0 8px 20px rgba(29, 158, 117, 0.1);
+        }
+
+        .service-info {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .service-icon {
+            font-size: 32px;
+            background: #f4fbf8;
+            width: 65px;
+            height: 65px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 16px;
+            color: var(--primary);
+            box-shadow: 0 4px 10px rgba(29, 158, 117, 0.1);
+        }
+
+        .service-info h3 {
+            font-size: 18px;
+            margin-bottom: 4px;
+            color: var(--text-dark);
+        }
+
+        .service-price {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 20px;
+            background: #f4fbf8;
+            padding: 8px 16px;
+            border-radius: 20px;
+        }
+
+        /* CLINIC CARD */
+        .clinic-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(29, 158, 117, 0.05);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .clinic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(29, 158, 117, 0.12);
+        }
+        
+        .clinic-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .clinic-info {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .clinic-info h3 {
+            color: var(--text-dark);
+            margin-bottom: 15px;
+            font-size: 22px;
+        }
+
+        .clinic-info p {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-light);
+            font-size: 15px;
+        }
+
+        /* BOOKING PAGE & CALENDAR */
+        .breadcrumbs {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-bottom: 25px;
+            font-size: 14px;
+            color: var(--text-light);
+            flex-wrap: wrap;
+        }
+        .breadcrumbs span {
+            display: inline-flex;
+            align-items: center;
+        }
+        .breadcrumbs span.active {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        .breadcrumbs span::after {
+            content: '→';
+            margin-left: 8px;
+            color: #ccc;
+        }
+        .breadcrumbs span:last-child::after { content: ''; }
+
+        .btn-back {
+            background: transparent;
+            border: 1px solid #ccc;
+            color: var(--text-dark);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition);
+        }
+        .btn-back:hover {
+            background: #eee;
+        }
+
+        .step-container {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(29, 158, 117, 0.08);
+            display: none;
+        }
+        .step-container.active { display: block; }
+
+        h2.step-title {
+            margin-bottom: 25px;
+            font-size: 24px;
+            color: var(--text-dark);
+        }
+
+        /* CALENDAR */
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .calendar-header button {
+            background: none; border: none; font-size: 20px; cursor: pointer; color: var(--primary);
+        }
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+            text-align: center;
+        }
+        .weekday { font-weight: 600; color: var(--text-light); margin-bottom: 10px; }
+        .day {
+            padding: 15px 5px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+        .day:not(.empty):not(.past):hover {
+            border-color: var(--primary);
+            background: #f4fbf8;
+        }
+        .day.empty { border: none; cursor: default; }
+        .day.past { color: #ccc; background: #f9f9f9; cursor: not-allowed; }
+        .day.fully-booked { background: #E05252; color: white; border-color: #E05252; cursor: not-allowed; }
+        .day.selected { background: var(--primary); color: white; border-color: var(--primary); }
+
+        /* TIME SLOTS */
+        .slots-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 15px;
+        }
+        .slot-btn {
+            padding: 15px;
+            border: 2px solid var(--primary);
+            border-radius: 8px;
+            background: var(--white);
+            color: var(--primary);
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .slot-btn:hover:not(:disabled) {
+            background: var(--primary);
+            color: var(--white);
+        }
+        .slot-btn:disabled {
+            border-color: #E05252;
+            color: #E05252;
+            background: #fef0f0;
+            cursor: not-allowed;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+        .slot-btn:disabled::after {
+            content: 'Занято';
+            font-size: 12px;
+            font-weight: 400;
+        }
+
+        .booking-summary {
+            background: var(--bg-color);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(29,158,117,0.2);
+        }
+        .booking-summary p { margin-bottom: 8px; }
+        .booking-summary strong { color: var(--primary); }
+
+        .form-group { margin-bottom: 20px; text-align: left; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--text-dark); }
+        .form-group input {
+            width: 100%; padding: 14px; border: 2px solid #e1e8e5; border-radius: 12px; font-size: 16px; outline: none; transition: var(--transition); background: #fff;
+        }
+        .form-group input:focus { border-color: var(--primary); background: #f4fbf8; }
+        
+        .alert {
+            padding: 15px; border-radius: 8px; margin-bottom: 20px; display: none; font-weight: 500;
+        }
+        .alert.error { background: #fef0f0; color: #E05252; border: 1px solid #E05252; display: block; }
+        .alert.success { background: #e8f5e9; color: #2e7d32; border: 1px solid #2e7d32; display: block; }
+
+        /* SPECIALIST DETAIL */
+        .detail-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            padding: 40px;
+            box-shadow: var(--shadow);
+            display: flex;
+            gap: 50px;
+            align-items: flex-start;
+            border: 1px solid rgba(29, 158, 117, 0.05);
+        }
+
+        .detail-photo img {
+            width: 300px;
+            height: 300px;
+            border-radius: var(--border-radius);
+            object-fit: cover;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .detail-info {
+            flex: 1;
+        }
+
+        .detail-info h2 {
+            font-size: 36px;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+            font-weight: 700;
+        }
+
+        .detail-info .spec {
+            font-size: 18px;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 25px;
+            display: inline-block;
+            background: #f4fbf8;
+            padding: 6px 16px;
+            border-radius: 20px;
+        }
+        
+        .info-block {
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .info-block:last-of-type {
+            border-bottom: none;
+        }
+
+        .detail-info h4 {
+            color: var(--text-dark);
+            font-size: 16px;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        .detail-info p {
+            color: var(--text-light);
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .detail-info .btn {
+            margin-top: 20px;
+            font-size: 18px;
+            padding: 16px 40px;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--white);
+            padding: 60px 20px 30px;
+            margin-top: auto;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.03);
+            border-top: 1px solid rgba(29, 158, 117, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-section h4 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .footer-section p, .footer-section a {
+            color: var(--text-light);
+            text-decoration: none;
+            margin-bottom: 12px;
+            display: block;
+            transition: var(--transition);
+        }
+        
+        .footer-section a:hover {
+            color: var(--primary);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 25px;
+            border-top: 1px solid #f0f0f0;
+            color: var(--text-light);
+            font-size: 15px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .detail-card {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 30px;
+            }
+            .info-block {
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+            nav {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .search-box input {
+                width: 100%;
+            }
+            .search-box input:focus {
+                width: 100%;
+            }
+            .service-card {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+            .service-info {
+                flex-direction: column;
+            }
+            .hero h1 {
+                font-size: 32px;
+            }
+            .hero p {
+                font-size: 16px;
+            }
+            .detail-photo img {
+                width: 100%;
+                max-width: 300px;
+                height: auto;
+                aspect-ratio: 1/1;
+            }
+        }
+        
+        .section-title {
+            text-align: center;
+            color: var(--text-dark);
+            margin-bottom: 40px;
+            font-size: 36px;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        /* MODAL */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(15, 52, 38, 0.6);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        .modal-content {
+            background: var(--white);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            max-width: 450px;
+            width: 90%;
+            text-align: center;
+            transform: translateY(30px) scale(0.95);
+            transition: var(--transition);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        .modal-overlay.active .modal-content {
+            transform: translateY(0) scale(1);
+        }
+        .modal-content h3 {
+            color: var(--primary);
+            margin-bottom: 25px;
+            font-size: 24px;
+        }
+        .modal-content input {
+            width: 100%;
+            padding: 14px;
+            margin-bottom: 20px;
+            border: 2px solid #e1e8e5;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: var(--transition);
+            outline: none;
+        }
+        .modal-content input:focus {
+            border-color: var(--primary);
+            background: #f4fbf8;
+        }
+        .close-modal {
+            background: transparent;
+            color: var(--text-light);
+            border: 1px solid #ddd;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-top: 15px;
+            font-weight: 600;
+            transition: var(--transition);
+            width: 100%;
+        }
+        .close-modal:hover {
+            background: #f5f5f5;
+            color: var(--text-dark);
+        }
+        .modal-content .btn {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-container">
+            <a class="logo" onclick="navigate('home')">
+                <svg viewBox="0 0 24 24"><path d="M12,2C10,2 8.43,3.44 8.05,5.36C5.16,6.35 3,9 3,12.25C3,16.53 6.47,20 10.75,20C11.5,20 12.19,19.83 12.8,19.53C14.18,21.05 16.14,22 18.25,22C18.66,22 19,21.66 19,21.25V18.15C20.25,16.89 21,15.15 21,13.25C21,9.25 17.75,6 13.75,6C13.25,6 12.77,6.05 12.31,6.15C12.16,3.84 10.23,2 7.85,2H12M12,4A6,6 0 0,1 18,10A6,6 0 0,1 12,16A6,6 0 0,1 6,10A6,6 0 0,1 12,4M12,7A3,3 0 0,0 9,10A3,3 0 0,0 12,13A3,3 0 0,0 15,10A3,3 0 0,0 12,7Z" /></svg>
+                DentaCare
+            </a>
+            <nav id="main-nav">
+                <a onclick="navigate('doctors')" data-i18n="nav_doctors">Врачи</a>
+                <a onclick="navigate('nurses')" data-i18n="nav_nurses">Медсёстры</a>
+                <a onclick="navigate('clinics')" data-i18n="nav_clinics">Клиники</a>
+                <a onclick="navigate('services')" data-i18n="nav_services">Услуги</a>
+                <a onclick="navigate('library')" data-i18n="nav_library">Библиотека</a>
+                <a onclick="navigate('my-bookings')" data-i18n="nav_my_bookings" style="color: #f39c12; font-weight: 600;">Мои записи</a>
+                <a onclick="navigate('booking-page')" data-i18n="nav_booking" style="color: var(--primary); font-weight: 700;">Запись</a>
+            </nav>
+            <div class="header-controls">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Поиск специалиста..." oninput="handleSearch()" data-i18n-ph="search_placeholder">
+                </div>
+                <div class="lang-switch">
+                    <button class="active" onclick="setLang('ru')">RU</button>
+                    <button onclick="setLang('kg')">KG</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- HOME -->
+        <section id="home" class="view-section active">
+            <div class="hero">
+                <h1 data-i18n="hero_title">Ваша улыбка - наша забота</h1>
+                <p data-i18n="hero_desc">Современная стоматология DentaCare предоставляет полный спектр услуг для всей семьи. Передовое оборудование и опытные специалисты.</p>
+                <button class="btn" onclick="openModal()" data-i18n="btn_book">Записаться на приём</button>
+            </div>
+            <div style="display: flex; gap: 25px; flex-wrap: wrap; justify-content: center; margin-top: 50px;">
+                <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=400&q=80" style="border-radius: var(--border-radius); width: 350px; height: 250px; object-fit: cover; box-shadow: var(--shadow);" alt="Стоматология">
+                <img src="https://images.unsplash.com/photo-1598256989800-fea5c5ce870b?auto=format&fit=crop&w=400&q=80" style="border-radius: var(--border-radius); width: 350px; height: 250px; object-fit: cover; box-shadow: var(--shadow);" alt="Кабинет">
+                <img src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=400&q=80" style="border-radius: var(--border-radius); width: 350px; height: 250px; object-fit: cover; box-shadow: var(--shadow);" alt="Улыбка">
+            </div>
+        </section>
+
+        <!-- DOCTORS -->
+        <section id="doctors" class="view-section">
+            <h2 class="section-title" data-i18n="nav_doctors">Врачи</h2>
+            <div class="grid" id="doctors-grid"></div>
+        </section>
+
+        <!-- NURSES -->
+        <section id="nurses" class="view-section">
+            <h2 class="section-title" data-i18n="nav_nurses">Медсёстры</h2>
+            <div class="grid" id="nurses-grid"></div>
+        </section>
+
+        <!-- CLINICS -->
+        <section id="clinics" class="view-section">
+            <h2 class="section-title" data-i18n="nav_clinics">Клиники</h2>
+            <div class="grid" id="clinics-grid"></div>
+        </section>
+
+        <!-- SERVICES -->
+        <section id="services" class="view-section">
+            <h2 class="section-title" data-i18n="nav_services">Услуги</h2>
+            <div id="services-list" style="max-width: 900px; margin: 0 auto;"></div>
+        </section>
+
+        <!-- LIBRARY -->
+        <section id="library" class="view-section">
+            <h2 class="section-title" data-i18n="nav_library">Библиотека</h2>
+            <div class="grid" id="library-grid"></div>
+        </section>
+
+        <!-- SEARCH RESULTS -->
+        <section id="search-results" class="view-section">
+            <h2 class="section-title" data-i18n="search_results">Результаты поиска</h2>
+            <div class="grid" id="search-grid"></div>
+        </section>
+
+        <!-- BOOKING PAGE -->
+        <section id="booking-page" class="view-section">
+            <div class="breadcrumbs" id="breadcrumbs">
+                <span class="active" id="bc-step1" data-i18n="bc_step1">Врач</span>
+                <span id="bc-step2" data-i18n="bc_step2">Календарь</span>
+                <span id="bc-step3" data-i18n="bc_step3">Время</span>
+                <span id="bc-step4" data-i18n="bc_step4">Запись</span>
+            </div>
+
+            <!-- STEP 1: DOCTORS -->
+            <div id="step-doctors" class="step-container active">
+                <h2 class="step-title" data-i18n="step1_title">Выберите специалиста</h2>
+                <div id="loading-doctors" style="text-align: center; color: var(--text-light);" data-i18n="loading_docs">Загрузка врачей...</div>
+                <div class="grid" id="doctorsList"></div>
+            </div>
+
+            <!-- STEP 2: CALENDAR -->
+            <div id="step-calendar" class="step-container">
+                <button class="btn-back" onclick="goToStep(1)" data-i18n="btn_back">← Назад</button>
+                <h2 class="step-title" id="calendar-title" data-i18n="step2_title">Выберите дату</h2>
+                
+                <div class="calendar-header">
+                    <button onclick="changeMonth(-1)">❮</button>
+                    <h3 id="monthDisplay">Май 2026</h3>
+                    <button onclick="changeMonth(1)">❯</button>
+                </div>
+                
+                <div class="calendar-grid">
+                    <div class="weekday">Пн</div><div class="weekday">Вт</div><div class="weekday">Ср</div>
+                    <div class="weekday">Чт</div><div class="weekday">Пт</div><div class="weekday">Сб</div><div class="weekday">Вс</div>
+                </div>
+                <div class="calendar-grid" id="calendarDays"></div>
+            </div>
+
+            <!-- STEP 3: TIME SLOTS -->
+            <div id="step-time" class="step-container">
+                <button class="btn-back" onclick="goToStep(2)" data-i18n="btn_back">← Назад</button>
+                <h2 class="step-title"><span data-i18n="step3_title">Выберите свободное время на</span> <span id="time-date-display"></span></h2>
+                <div id="loading-slots" style="text-align: center; color: var(--text-light);" data-i18n="loading_slots">Проверка свободных мест...</div>
+                <div class="slots-grid" id="slotsList"></div>
+            </div>
+
+            <!-- STEP 4: FORM -->
+            <div id="step-form" class="step-container">
+                <button class="btn-back" onclick="goToStep(3)" data-i18n="btn_back">← Назад</button>
+                <h2 class="step-title" data-i18n="step4_title">Оформление записи</h2>
+                
+                <div id="messageBox"></div>
+
+                <div class="booking-summary">
+                    <p><span data-i18n="sum_doc">Врач:</span> <strong id="summary-doctor"></strong></p>
+                    <p><span data-i18n="sum_date">Дата:</span> <strong id="summary-date"></strong></p>
+                    <p><span data-i18n="sum_time">Время:</span> <strong id="summary-time"></strong></p>
+                </div>
+
+                <div class="form-group">
+                    <label data-i18n="lbl_name">Имя *</label>
+                    <input type="text" id="patientName" placeholder="Иван" data-i18n-ph="modal_name">
+                </div>
+                <div class="form-group">
+                    <label data-i18n="lbl_surname">Фамилия *</label>
+                    <input type="text" id="patientSurname" placeholder="Иванов">
+                </div>
+                <div class="form-group">
+                    <label data-i18n="lbl_phone">Телефон *</label>
+                    <input type="tel" id="patientPhone" placeholder="+996 ___ __ __ __" data-i18n-ph="modal_phone">
+                </div>
+                
+                <button class="btn" style="width: 100%;" id="submitBtn" onclick="submitAppt()" data-i18n="btn_submit">Подтвердить запись</button>
+            </div>
+            
+            <!-- STEP 5: SUCCESS -->
+            <div id="step-success" class="step-container" style="text-align: center; padding: 50px 20px;">
+                <div style="font-size: 60px; margin-bottom: 20px;">✅</div>
+                <h2 style="color: #2e7d32; margin-bottom: 15px;" data-i18n="success_title">Вы успешно записаны!</h2>
+                <p style="color: var(--text-light); font-size: 18px;" id="successMsg"></p>
+                <button class="btn" style="margin-top: 30px;" onclick="navigate('home')" data-i18n="btn_home">На главную</button>
+            </div>
+            <!-- MY BOOKINGS PAGE -->
+            <div id="my-bookings" class="step-container">
+                <h2 class="step-title" data-i18n="my_bookings_title">Управление записями</h2>
+                <div class="form-group" style="max-width: 400px; margin: 0 auto 30px auto;">
+                    <label data-i18n="lbl_phone">Введите ваш телефон</label>
+                    <input type="tel" id="searchPhone" placeholder="+996 ___ __ __ __">
+                    <button class="btn" style="width: 100%; margin-top: 10px;" onclick="searchMyBookings()" data-i18n="btn_search">Найти записи</button>
+                </div>
+                <div id="myBookingsList" style="display: flex; flex-direction: column; gap: 15px;"></div>
+            </div>
+
+        </section>
+
+        <!-- SPECIALIST DETAIL -->
+        <section id="specialist-detail" class="view-section">
+            <button class="card-btn" style="width: auto; margin-bottom: 30px; display: inline-flex; align-items: center; gap: 8px;" onclick="navigateBack()">
+                <span data-i18n="btn_back">← Назад</span>
+            </button>
+            <div class="detail-card" id="specialist-content">
+                <!-- Content injected via JS -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4 data-i18n="footer_contacts">Контакты</h4>
+                <p>📞 +996 (555) 123-456</p>
+                <p>📞 +996 (700) 123-456</p>
+                <p>✉️ info@dentacare.kg</p>
+            </div>
+            <div class="footer-section">
+                <h4 data-i18n="footer_hours">Режим работы</h4>
+                <p data-i18n="hours_wk">Пн - Пт: 08:00 - 20:00</p>
+                <p data-i18n="hours_we">Сб - Вс: 09:00 - 18:00</p>
+                <p data-i18n="hours_note" style="color: var(--primary); font-weight: 500; margin-top: 5px;">Без перерывов и выходных</p>
+            </div>
+            <div class="footer-section">
+                <h4 data-i18n="footer_socials">Мы в соцсетях</h4>
+                <a href="#">Instagram: @dentacare_kg</a>
+                <a href="#">Facebook: DentaCare Clinic</a>
+                <a href="#">Telegram: @dentacare</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 DentaCare. <span data-i18n="footer_rights">Все права защищены.</span>
+        </div>
+    </footer>
+
+    <!-- Booking Modal -->
+    <div class="modal-overlay" id="bookingModal">
+        <div class="modal-content">
+            <h3 data-i18n="modal_title">Запись на приём</h3>
+            <input type="text" placeholder="Ваше имя" id="modalName" data-i18n-ph="modal_name">
+            <input type="tel" placeholder="Номер телефона" id="modalPhone" data-i18n-ph="modal_phone">
+            <button class="btn" onclick="submitBooking()" data-i18n="btn_submit">Отправить заявку</button>
+            <button class="close-modal" onclick="closeModal()" data-i18n="btn_cancel">Отмена</button>
+        </div>
+    </div>
+
+    <!-- Edit Appointment Modal (Patient) -->
+    <div class="modal-overlay" id="editApptModal">
+        <div class="modal-content">
+            <h3 data-i18n="modal_edit_title">Изменить запись</h3>
+            <input type="hidden" id="editApptId">
+            <input type="hidden" id="editApptDoctorId">
+            <div class="form-group">
+                <label data-i18n="lbl_name">Имя</label>
+                <input type="text" id="editApptName">
+            </div>
+            <div class="form-group">
+                <label data-i18n="lbl_surname">Фамилия</label>
+                <input type="text" id="editApptSurname">
+            </div>
+            <div class="form-group">
+                <label data-i18n="lbl_phone">Телефон</label>
+                <input type="tel" id="editApptPhone">
+            </div>
+            <div class="form-group">
+                <label data-i18n="lbl_date">Дата</label>
+                <input type="date" id="editApptDate">
+            </div>
+            <div class="form-group">
+                <label data-i18n="lbl_time">Время</label>
+                <select id="editApptTime">
+                    <option value="09:00">09:00</option><option value="10:00">10:00</option><option value="11:00">11:00</option>
+                    <option value="12:00">12:00</option><option value="14:00">14:00</option><option value="15:00">15:00</option>
+                    <option value="16:00">16:00</option><option value="17:00">17:00</option>
+                </select>
+            </div>
+            <div style="display: flex; gap: 10px;">
+                <button class="close-modal" onclick="closeEditModal()" style="flex:1; margin-top:0;" data-i18n="btn_cancel">Отмена</button>
+                <button class="btn" style="flex:1;" onclick="saveEditAppt()" data-i18n="btn_save">Сохранить</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // TRANSLATIONS
+        const translations = {
+            ru: {
+                nav_doctors: "Врачи",
+                nav_nurses: "Медсёстры",
+                nav_clinics: "Клиники",
+                nav_services: "Услуги",
+                nav_library: "Библиотека",
+                nav_booking: "Запись онлайн",
+                lbl_service: "Выберите услугу",
+                lbl_specialist: "Выберите специалиста",
+                lbl_date: "Выберите дату",
+                lbl_time: "Выберите время",
+                lbl_name: "Ваше имя",
+                lbl_phone: "Ваш телефон",
+                search_placeholder: "Поиск специалиста...",
+                hero_title: "Ваша улыбка - наша забота",
+                hero_desc: "Современная стоматология DentaCare предоставляет полный спектр услуг для всей семьи. Передовое оборудование и опытные специалисты.",
+                btn_book: "Записаться на приём",
+                btn_more: "Подробнее",
+                btn_back: "← Назад",
+                search_results: "Результаты поиска",
+                footer_contacts: "Контакты",
+                footer_hours: "Режим работы",
+                hours_wk: "Пн - Пт: 08:00 - 20:00",
+                hours_we: "Сб - Вс: 09:00 - 18:00",
+                hours_note: "Без перерывов и выходных",
+                footer_socials: "Мы в соцсетях",
+                footer_rights: "Все права защищены.",
+                modal_title: "Запись на приём",
+                modal_name: "Ваше имя",
+                modal_phone: "Номер телефона",
+                btn_submit: "Отправить заявку",
+                btn_cancel: "Отмена",
+                alert_success: "Заявка успешно отправлена! Мы свяжемся с вами в ближайшее время.",
+                spec_exp: "Опыт работы:",
+                spec_edu: "Образование:",
+                spec_sched: "Расписание:",
+                years: "лет",
+                bc_step1: "Врач", bc_step2: "Календарь", bc_step3: "Время", bc_step4: "Запись",
+                step1_title: "Выберите специалиста", step2_title: "Выберите дату", 
+                step3_title: "Выберите свободное время на", step4_title: "Оформление записи",
+                loading_docs: "Загрузка врачей...", loading_slots: "Проверка свободных мест...",
+                sum_doc: "Врач:", sum_date: "Дата:", sum_time: "Время:",
+                lbl_surname: "Фамилия *", success_title: "Вы успешно записаны!", btn_home: "На главную",
+                nav_my_bookings: "Мои записи", my_bookings_title: "Управление записями",
+                btn_search: "Найти записи", modal_edit_title: "Изменить запись", btn_save: "Сохранить",
+                not_found: "Записи не найдены", edit_btn: "Изменить"
+            },
+            kg: {
+                nav_doctors: "Дарыгерлер",
+                nav_nurses: "Медбикелер",
+                nav_clinics: "Клиникалар",
+                nav_services: "Кызматтар",
+                nav_library: "Китепкана",
+                nav_booking: "Онлайн жазылуу",
+                lbl_service: "Кызматты тандаңыз",
+                lbl_specialist: "Адисти тандаңыз",
+                lbl_date: "Күндү тандаңыз",
+                lbl_time: "Убакытты тандаңыз",
+                lbl_name: "Сиздин атыңыз",
+                lbl_phone: "Телефон номериңиз",
+                search_placeholder: "Адисти издөө...",
+                hero_title: "Сиздин жылмаюуңуз - биздин камкордугубуз",
+                hero_desc: "Заманбап DentaCare стоматологиясы бүт үй-бүлө үчүн кызматтардын толук спектрин сунуштайт. Алдыңкы жабдуулар жана тажрыйбалуу адистер.",
+                btn_book: "Кабыл алууга жазылуу",
+                btn_more: "Кененирээк",
+                btn_back: "← Артка",
+                search_results: "Издөө жыйынтыктары",
+                footer_contacts: "Байланыштар",
+                footer_hours: "Иштөө убактысы",
+                hours_wk: "Дүй - Жум: 08:00 - 20:00",
+                hours_we: "Ишм - Жек: 09:00 - 18:00",
+                hours_note: "Тыныгуусуз жана дем алышсыз",
+                footer_socials: "Биз социалдык тармактарда",
+                footer_rights: "Бардык укуктар корголгон.",
+                modal_title: "Кабыл алууга жазылуу",
+                modal_name: "Сиздин атыңыз",
+                modal_phone: "Телефон номери",
+                btn_submit: "Өтүнмө жөнөтүү",
+                btn_cancel: "Жокко чыгаруу",
+                alert_success: "Өтүнмө ийгиликтүү жөнөтүлдү! Жакын арада сиз менен байланышабыз.",
+                spec_exp: "Иш тажрыйбасы:",
+                spec_edu: "Билими:",
+                spec_sched: "График:",
+                years: "жыл",
+                bc_step1: "Дарыгер", bc_step2: "Календарь", bc_step3: "Убакыт", bc_step4: "Жазылуу",
+                step1_title: "Адисти тандаңыз", step2_title: "Күндү тандаңыз", 
+                step3_title: "Бош убакытты тандаңыз:", step4_title: "Жазылууну тариздөө",
+                loading_docs: "Дарыгерлер жүктөлүүдө...", loading_slots: "Бош орундарды текшерүү...",
+                sum_doc: "Дарыгер:", sum_date: "Күнү:", sum_time: "Убактысы:",
+                lbl_surname: "Фамилияңыз *", success_title: "Ийгиликтүү жазылдыңыз!", btn_home: "Башкы бетке",
+                nav_my_bookings: "Менин жазылууларым", my_bookings_title: "Жазылууларды башкаруу",
+                btn_search: "Жазылууларды табуу", modal_edit_title: "Жазылууну өзгөртүү", btn_save: "Сактоо",
+                not_found: "Жазылуулар табылган жок", edit_btn: "Өзгөртүү"
+            }
+        };
+
+        // DATA
+        const data = {
+            doctors: [],
+            nurses: [],
+            clinics: [
+                { id: 'c1', name: { ru: 'DentaCare Центр', kg: 'DentaCare Борбору' }, address: { ru: 'ул. Токтогула, 125', kg: 'Токтогул көч., 125' }, phone: '+996 555 111 222', img: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=600&q=80' },
+                { id: 'c2', name: { ru: 'DentaCare Юг', kg: 'DentaCare Түштүк' }, address: { ru: 'мкр. Асанбай, 45', kg: 'Асанбай кичи р-ну, 45' }, phone: '+996 700 333 444', img: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=600&q=80' },
+                { id: 'c3', name: { ru: 'DentaCare Восток', kg: 'DentaCare Чыгыш' }, address: { ru: 'ул. Алматинская, 200', kg: 'Алматинская көч., 200' }, phone: '+996 777 555 666', img: 'https://images.unsplash.com/photo-1504439468489-c8920d786a2b?auto=format&fit=crop&w=600&q=80' }
+            ],
+            services: [
+                { id: 's1', icon: '🦷', name: { ru: 'Консультация', kg: 'Кеңеш берүү' }, desc: { ru: 'Осмотр и составление плана лечения', kg: 'Текшерүү жана дарылоо планын түзүү' }, price: '500 KGS' },
+                { id: 's2', icon: '✨', name: { ru: 'Профессиональная чистка', kg: 'Кесиптик тазалоо' }, desc: { ru: 'Удаление зубного камня и налета (AirFlow)', kg: 'Тиш таштарын жана кебээрди тазалоо (AirFlow)' }, price: '2500 KGS' },
+                { id: 's3', icon: '🩹', name: { ru: 'Лечение кариеса', kg: 'Кариести дарылоо' }, desc: { ru: 'Установка световой пломбы', kg: 'Жарык пломбасын коюу' }, price: 'от 1500 KGS' },
+                { id: 's4', icon: '🔧', name: { ru: 'Имплантация', kg: 'Имплантация' }, desc: { ru: 'Установка импланта (Южная Корея, Швейцария)', kg: 'Имплант орнотуу (Түштүк Корея, Швейцария)' }, price: 'от 20000 KGS' },
+                { id: 's5', icon: '😁', name: { ru: 'Брекеты', kg: 'Брекеттер' }, desc: { ru: 'Металлические, керамические, сапфировые', kg: 'Металл, керамикалык, сапфирдик' }, price: 'от 15000 KGS' },
+                { id: 's6', icon: '⚕️', name: { ru: 'Удаление зуба', kg: 'Тиш жулуп салуу' }, desc: { ru: 'Простое и сложное удаление (зубы мудрости)', kg: 'Жөнөкөй жана татаал жулуп салуу (акыл азуу)' }, price: 'от 1000 KGS' },
+                { id: 's7', icon: '👶', name: { ru: 'Детская стоматология', kg: 'Балдар стоматологиясы' }, desc: { ru: 'Лечение молочных зубов без боли', kg: 'Сүт тиштерин оорутпай дарылоо' }, price: 'от 1000 KGS' },
+                { id: 's8', icon: '💎', name: { ru: 'Отбеливание', kg: 'Агартуу' }, desc: { ru: 'Безопасное лазерное отбеливание ZOOM', kg: 'Коопсуз лазердик агартуу ZOOM' }, price: '8000 KGS' }
+            ],
+            library: [
+                { id: 'l1', title: { ru: 'Как правильно чистить зубы?', kg: 'Тишти кантип туура жууш керек?' }, desc: { ru: 'Советы стоматологов по ежедневному уходу за полостью рта.', kg: 'Ооз көңдөйүнө күнүмдүк кам көрүү боюнча стоматологдордун кеңештери.' }, img: 'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=400&q=80' },
+                { id: 'l2', title: { ru: 'Что такое имплантация?', kg: 'Имплантация деген эмне?' }, desc: { ru: 'Всё, что нужно знать перед установкой зубного импланта.', kg: 'Тиш имплантын орнотор алдында билишиңиз керек болгон нерселердин баары.' }, img: 'https://images.unsplash.com/photo-1598256989800-fea5c5ce870b?auto=format&fit=crop&w=400&q=80' },
+                { id: 'l3', title: { ru: 'Брекеты для взрослых', kg: 'Чоңдор үчүн брекеттер' }, desc: { ru: 'Никогда не поздно исправить прикус. Виды брекетов.', kg: 'Тиш тиштешүүнү оңдоого эч качан кеч эмес. Брекеттердин түрлөрү.' }, img: 'https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=400&q=80' }
+            ]
+        };
+
+        // STATE
+        let currentLang = 'ru';
+        let prevHistory = [];
+
+        // INIT
+        document.addEventListener('DOMContentLoaded', () => {
+            renderAll();
+            applyLanguage();
+        });
+
+        function setLang(lang) {
+            currentLang = lang;
+            document.querySelectorAll('.lang-switch button').forEach(btn => {
+                btn.classList.remove('active');
+                if(btn.textContent.toLowerCase() === lang) btn.classList.add('active');
+            });
+            applyLanguage();
+            renderAll();
+            
+            // re-render detail view if active
+            const detailSection = document.getElementById('specialist-detail');
+            if(detailSection.classList.contains('active')) {
+                const specId = detailSection.getAttribute('data-current-id');
+                if(specId) showSpecialist(specId);
+            }
+        }
+
+        function applyLanguage() {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[currentLang][key]) {
+                    el.textContent = translations[currentLang][key];
+                }
+            });
+            document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+                const key = el.getAttribute('data-i18n-ph');
+                if (translations[currentLang][key]) {
+                    el.placeholder = translations[currentLang][key];
+                }
+            });
+        }
+
+        function navigate(viewId) {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            document.querySelectorAll('.view-section').forEach(sec => sec.classList.remove('active'));
+            document.getElementById(viewId).classList.add('active');
+            
+            document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+            const activeNav = document.querySelector(`nav a[onclick="navigate('${viewId}')"]`);
+            if(activeNav) activeNav.classList.add('active');
+            
+            if(viewId !== 'specialist-detail' && viewId !== 'search-results') {
+                prevHistory = [viewId];
+            }
+            
+            // Clear search input if navigating to a main section
+            if(viewId !== 'search-results' && viewId !== 'specialist-detail') {
+                document.getElementById('searchInput').value = '';
+            }
+        }
+
+        function navigateBack() {
+            const viewId = prevHistory.length > 0 ? prevHistory[0] : 'home';
+            navigate(viewId);
+        }
+
+        function getAvatar(nameStr) {
+            const nameObj = typeof nameStr === 'object' ? nameStr.ru : nameStr;
+            const encodedName = encodeURIComponent(nameObj);
+            return `https://ui-avatars.com/api/?name=${encodedName}&background=1D9E75&color=fff&size=200`;
+        }
+
+        function renderAll() {
+            // Doctors
+            const docGrid = document.getElementById('doctors-grid');
+            docGrid.innerHTML = data.doctors.map(d => createPersonCard(d)).join('');
+            
+            // Nurses
+            const nurseGrid = document.getElementById('nurses-grid');
+            nurseGrid.innerHTML = data.nurses.map(n => createPersonCard(n)).join('');
+            
+            // Clinics
+            const clinicGrid = document.getElementById('clinics-grid');
+            clinicGrid.innerHTML = data.clinics.map(c => `
+                <div class="clinic-card">
+                    <img src="${c.img}" alt="${c.name[currentLang]}">
+                    <div class="clinic-info">
+                        <h3>${c.name[currentLang]}</h3>
+                        <p>📍 ${c.address[currentLang]}</p>
+                        <p>📞 ${c.phone}</p>
+                    </div>
+                </div>
+            `).join('');
+
+            // Services
+            const servicesList = document.getElementById('services-list');
+            servicesList.innerHTML = data.services.map(s => `
+                <div class="service-card">
+                    <div class="service-info">
+                        <div class="service-icon">${s.icon}</div>
+                        <div>
+                            <h3>${s.name[currentLang]}</h3>
+                            <p style="color: var(--text-light);">${s.desc[currentLang]}</p>
+                        </div>
+                    </div>
+                    <div class="service-price">${s.price}</div>
+                </div>
+            `).join('');
+
+            // Library
+            const libGrid = document.getElementById('library-grid');
+            libGrid.innerHTML = data.library.map(l => `
+                <div class="clinic-card">
+                    <img src="${l.img}" alt="article">
+                    <div class="clinic-info">
+                        <h3 style="font-size: 18px; margin-bottom: 10px; color: var(--text-dark);">${l.title[currentLang]}</h3>
+                        <p style="font-size: 14px; color: var(--text-light); flex-grow: 1;">${l.desc[currentLang]}</p>
+                        <button class="card-btn" style="margin-top: 20px; border:none; background: #f4fbf8; color: var(--primary);" data-i18n="btn_more">${translations[currentLang].btn_more}</button>
+                    </div>
+                </div>
+            `).join('');
+
+            // Booking setup
+            const serviceSelect = document.getElementById('bookService');
+            if(serviceSelect) {
+                serviceSelect.innerHTML = data.services.map(s => `<option value="${s.id}">${s.name[currentLang]}</option>`).join('');
+                updateSpecialists();
+            }
+        }
+
+        const serviceDoctorMap = {
+            's1': ['d1', 'd2', 'd3', 'd4', 'd5', 'd6'],
+            's2': ['d3', 'd6'],
+            's3': ['d3', 'd4'],
+            's4': ['d1', 'd5'],
+            's5': ['d2'],
+            's6': ['d1'],
+            's7': ['d4'],
+            's8': ['d3']
+        };
+
+        function createPersonCard(person) {
+            return `
+                <div class="card">
+                    <img src="${getAvatar(person.name)}" alt="${person.name[currentLang]}">
+                    <h3>${person.name[currentLang]}</h3>
+                    <p class="spec">${person.spec[currentLang]}</p>
+                    <button class="card-btn" onclick="showSpecialist('${person.id}')">${translations[currentLang].btn_more}</button>
+                </div>
+            `;
+        }
+
+        function showSpecialist(id) {
+            let person = data.doctors.find(d => d.id === id) || data.nurses.find(n => n.id === id);
+            if(!person) return;
+            
+            const detailSection = document.getElementById('specialist-detail');
+            detailSection.setAttribute('data-current-id', id);
+            
+            const content = document.getElementById('specialist-content');
+            content.innerHTML = `
+                <div class="detail-photo">
+                    <img src="${getAvatar(person.name)}" alt="${person.name[currentLang]}">
+                </div>
+                <div class="detail-info">
+                    <h2>${person.name[currentLang]}</h2>
+                    <div class="spec">${person.spec[currentLang]}</div>
+                    
+                    <div class="info-block">
+                        <h4>${translations[currentLang].spec_exp}</h4>
+                        <p>${person.exp} ${translations[currentLang].years}</p>
+                    </div>
+                    
+                    <div class="info-block">
+                        <h4>${translations[currentLang].spec_edu}</h4>
+                        <p>${person.edu[currentLang]}</p>
+                    </div>
+                    
+                    <div class="info-block">
+                        <h4>${translations[currentLang].spec_sched}</h4>
+                        <p>${person.schedule}</p>
+                    </div>
+                    
+                    <button class="btn" onclick="openModal()">${translations[currentLang].btn_book}</button>
+                </div>
+            `;
+            
+            navigate('specialist-detail');
+        }
+
+        function handleSearch() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            if(!query) {
+                if(document.getElementById('search-results').classList.contains('active')) {
+                    navigateBack();
+                }
+                return;
+            }
+
+            const allPeople = [...data.doctors, ...data.nurses];
+            const results = allPeople.filter(p => 
+                p.name.ru.toLowerCase().includes(query) || 
+                p.name.kg.toLowerCase().includes(query) ||
+                p.spec.ru.toLowerCase().includes(query) ||
+                p.spec.kg.toLowerCase().includes(query)
+            );
+
+            const searchGrid = document.getElementById('search-grid');
+            if(results.length === 0) {
+                searchGrid.innerHTML = `<p style="grid-column: 1/-1; text-align:center; color: var(--text-light); font-size: 18px; padding: 40px 0;">Ничего не найдено / Эч нерсе табылган жок</p>`;
+            } else {
+                searchGrid.innerHTML = results.map(p => createPersonCard(p)).join('');
+            }
+            
+            navigate('search-results');
+        }
+
+        function openModal() {
+            document.getElementById('bookingModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('bookingModal').classList.remove('active');
+            document.getElementById('modalName').value = '';
+            document.getElementById('modalPhone').value = '';
+        }
+        
+        function submitBooking() {
+            const name = document.getElementById('modalName').value;
+            const phone = document.getElementById('modalPhone').value;
+            
+            if(!name || !phone) return;
+            
+            alert(translations[currentLang].alert_success);
+            closeModal();
+        }
+
+        const API_BASE = 'http://localhost:3000/api';
+        
+        let appState = {
+            doctors: [],
+            selectedDoctor: null,
+            selectedDate: null,
+            selectedTime: null,
+            currentMonth: new Date()
+        };
+
+        async function fetchDoctors() {
+            try {
+                const res = await fetch(`${API_BASE}/doctors`);
+                const docs = await res.json();
+                
+                // Map to old structure
+                data.doctors = docs.map(d => ({
+                    id: d.id,
+                    name: { ru: d.name_ru, kg: d.name_kg },
+                    spec: { ru: d.spec_ru, kg: d.spec_kg },
+                    exp: d.exp,
+                    edu: { ru: d.edu_ru, kg: d.edu_kg },
+                    schedule: d.schedule,
+                    photo_url: d.photo_url
+                }));
+                
+                appState.doctors = docs.map(d => ({
+                    id: d.id, name: d.name_ru, specialty: d.spec_ru, photo_url: d.photo_url
+                }));
+                
+                renderApiDoctors();
+                return true;
+            } catch (err) {
+                document.getElementById('loading-doctors').innerHTML = '<span style="color: red;">Ошибка загрузки врачей.</span>';
+                return false;
+            }
+        }
+
+        async function fetchNurses() {
+            try {
+                const res = await fetch(`${API_BASE}/nurses`);
+                const nurses = await res.json();
+                data.nurses = nurses.map(n => ({
+                    id: n.id,
+                    name: { ru: n.name_ru, kg: n.name_kg },
+                    spec: { ru: n.spec_ru, kg: n.spec_kg },
+                    exp: n.exp,
+                    edu: { ru: n.edu_ru, kg: n.edu_kg },
+                    schedule: n.schedule,
+                    photo_url: n.photo_url
+                }));
+                return true;
+            } catch (err) { return false; }
+        }
+
+        function renderApiDoctors() {
+            const list = document.getElementById('doctorsList');
+            document.getElementById('loading-doctors').style.display = 'none';
+            list.innerHTML = '';
+            appState.doctors.forEach(doc => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <img src="${doc.photo_url}" alt="${doc.name}">
+                    <h3>${doc.name}</h3>
+                    <p class="spec" style="margin-bottom:0;">${doc.specialty}</p>
+                `;
+                card.onclick = () => selectDoctorForBooking(doc);
+                list.appendChild(card);
+            });
+        }
+
+        function goToStep(step) {
+            document.querySelectorAll('.step-container').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.breadcrumbs span').forEach(el => el.classList.remove('active'));
+            
+            if (step === 1) {
+                document.getElementById('step-doctors').classList.add('active');
+                document.getElementById('bc-step1').classList.add('active');
+                appState.selectedDoctor = null;
+            } else if (step === 2) {
+                document.getElementById('step-calendar').classList.add('active');
+                document.getElementById('bc-step2').classList.add('active');
+            } else if (step === 3) {
+                document.getElementById('step-time').classList.add('active');
+                document.getElementById('bc-step3').classList.add('active');
+            } else if (step === 4) {
+                document.getElementById('step-form').classList.add('active');
+                document.getElementById('bc-step4').classList.add('active');
+            }
+        }
+
+        function selectDoctorForBooking(doc) {
+            appState.selectedDoctor = doc;
+            document.getElementById('calendar-title').textContent = `${translations[currentLang].step2_title} (${doc.name})`;
+            appState.currentMonth = new Date();
+            renderBookingCalendar();
+            goToStep(2);
+        }
+
+        function changeMonth(delta) {
+            appState.currentMonth.setMonth(appState.currentMonth.getMonth() + delta);
+            renderBookingCalendar();
+        }
+
+        async function checkFullyBooked(dateStr) {
+            try {
+                const res = await fetch(`${API_BASE}/appointments/check?doctor_id=${appState.selectedDoctor.id}&date=${dateStr}`);
+                const data = await res.json();
+                return data.fullyBooked;
+            } catch (err) {
+                return false;
+            }
+        }
+
+        function renderBookingCalendar() {
+            const daysContainer = document.getElementById('calendarDays');
+            daysContainer.innerHTML = '';
+            
+            const monthNames = ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"];
+            const m = appState.currentMonth.getMonth();
+            const y = appState.currentMonth.getFullYear();
+            
+            document.getElementById('monthDisplay').textContent = `${monthNames[m]} ${y}`;
+            
+            const firstDay = new Date(y, m, 1);
+            const lastDay = new Date(y, m + 1, 0);
+            
+            let startDay = firstDay.getDay() === 0 ? 6 : firstDay.getDay() - 1;
+            for (let i = 0; i < startDay; i++) { daysContainer.innerHTML += `<div class="day empty"></div>`; }
+
+            const today = new Date();
+            today.setHours(0,0,0,0);
+            
+            for (let i = 1; i <= lastDay.getDate(); i++) {
+                const d = new Date(y, m, i);
+                const isPast = d < today;
+                const dateStr = `${y}-${String(m+1).padStart(2,'0')}-${String(i).padStart(2,'0')}`;
+                
+                const div = document.createElement('div');
+                div.className = 'day';
+                if (isPast) div.classList.add('past');
+                div.textContent = i;
+                
+                if (!isPast) {
+                    div.onclick = () => selectDate(dateStr, div);
+                    checkFullyBooked(dateStr).then(isFull => {
+                        if (isFull) { div.classList.add('fully-booked'); div.onclick = null; }
+                    });
+                }
+                daysContainer.appendChild(div);
+            }
+        }
+
+        function selectDate(dateStr, divElement) {
+            document.querySelectorAll('.day').forEach(el => el.classList.remove('selected'));
+            divElement.classList.add('selected');
+            appState.selectedDate = dateStr;
+            
+            const parts = dateStr.split('-');
+            document.getElementById('time-date-display').textContent = `${parts[2]}.${parts[1]}.${parts[0]}`;
+            
+            fetchSlots();
+            goToStep(3);
+        }
+
+        async function fetchSlots() {
+            const list = document.getElementById('slotsList');
+            const loading = document.getElementById('loading-slots');
+            list.innerHTML = '';
+            loading.style.display = 'block';
+
+            try {
+                const res = await fetch(`${API_BASE}/doctors/${appState.selectedDoctor.id}/slots?date=${appState.selectedDate}`);
+                const slots = await res.json();
+                loading.style.display = 'none';
+                
+                if (slots.length === 0) {
+                    list.innerHTML = `<p style="grid-column: 1/-1; text-align:center;">${currentLang === 'ru' ? 'В этот день врач не принимает.' : 'Бул күнү дарыгер кабыл албайт.'}</p>`;
+                    return;
+                }
+
+                slots.forEach(s => {
+                    const btn = document.createElement('button');
+                    btn.className = 'slot-btn';
+                    btn.textContent = s.time;
+                    if (!s.available) {
+                        btn.disabled = true;
+                    } else {
+                        btn.onclick = () => selectTime(s.time);
+                    }
+                    list.appendChild(btn);
+                });
+            } catch (err) {}
+        }
+
+        function selectTime(time) {
+            appState.selectedTime = time;
+            document.getElementById('summary-doctor').textContent = `${appState.selectedDoctor.specialty} ${appState.selectedDoctor.name}`;
+            const parts = appState.selectedDate.split('-');
+            document.getElementById('summary-date').textContent = `${parts[2]}.${parts[1]}.${parts[0]}`;
+            document.getElementById('summary-time').textContent = time;
+            goToStep(4);
+        }
+
+        function showMessage(type, text) {
+            const box = document.getElementById('messageBox');
+            box.className = `alert ${type}`;
+            box.textContent = text;
+        }
+
+        async function submitAppt() {
+            const name = document.getElementById('patientName').value.trim();
+            const surname = document.getElementById('patientSurname').value.trim();
+            const phone = document.getElementById('patientPhone').value.trim();
+            const msgBox = document.getElementById('messageBox');
+            
+            if (!name || !surname || !phone || phone.length < 9) {
+                showMessage('error', currentLang === 'ru' ? 'Пожалуйста, заполните все поля.' : 'Сураныч, бардык талааларды толтуруңуз.');
+                return;
+            }
+
+            const btn = document.getElementById('submitBtn');
+            btn.disabled = true;
+            btn.textContent = '...';
+            msgBox.style.display = 'none';
+
+            try {
+                const res = await fetch(`${API_BASE}/appointments`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        doctor_id: appState.selectedDoctor.id,
+                        patient_name: name,
+                        patient_surname: surname,
+                        phone: phone,
+                        date: appState.selectedDate,
+                        time_slot: appState.selectedTime
+                    })
+                });
+                const responseData = await res.json();
+                if (res.status === 409) {
+                    showMessage('error', '⚠️ ' + responseData.error);
+                    btn.disabled = false;
+                    btn.textContent = translations[currentLang].btn_submit;
+                } else if (res.ok) {
+                    document.getElementById('breadcrumbs').style.display = 'none';
+                    document.querySelectorAll('.step-container').forEach(el => el.classList.remove('active'));
+                    document.getElementById('step-success').classList.add('active');
+                    const parts = appState.selectedDate.split('-');
+                    document.getElementById('successMsg').textContent = `${currentLang === 'ru' ? 'Ждём вас' : 'Сизди күтөбүз'} ${parts[2]}.${parts[1]}.${parts[0]} в ${appState.selectedTime}`;
+                } else {
+                    showMessage('error', responseData.error || 'Ошибка');
+                    btn.disabled = false;
+                    btn.textContent = translations[currentLang].btn_submit;
+                }
+            } catch (err) {
+                showMessage('error', 'Ошибка сети.');
+                btn.disabled = false;
+                btn.textContent = translations[currentLang].btn_submit;
+            }
+        }
+
+        // ================== MY BOOKINGS ==================
+        let myBookings = [];
+        async function searchMyBookings() {
+            const phone = document.getElementById('searchPhone').value.trim();
+            if (!phone || phone.length < 9) return;
+            try {
+                const res = await fetch(`${API_BASE}/appointments/search?phone=${encodeURIComponent(phone)}`);
+                myBookings = await res.json();
+                renderMyBookings();
+            } catch(e) {}
+        }
+
+        function renderMyBookings() {
+            const list = document.getElementById('myBookingsList');
+            if (myBookings.length === 0) {
+                list.innerHTML = `<p style="text-align:center; color: var(--text-light);">${translations[currentLang].not_found}</p>`;
+                return;
+            }
+
+            list.innerHTML = myBookings.map(b => {
+                const parts = b.date.split('T')[0].split('-');
+                const docName = currentLang === 'ru' ? b.doctor_name_ru : b.doctor_name_kg;
+                const docSpec = currentLang === 'ru' ? b.spec_ru : b.spec_kg;
+                return `
+                    <div class="service-card" style="margin-bottom:0;">
+                        <div class="service-info" style="align-items:flex-start;">
+                            <div>
+                                <h3 style="color: var(--primary); margin-bottom: 5px;">${parts[2]}.${parts[1]}.${parts[0]} - ${b.time_slot}</h3>
+                                <p style="margin-bottom: 5px; color: var(--text-dark);"><strong>Врач:</strong> ${docSpec} ${docName}</p>
+                                <p style="font-size: 14px; color: var(--text-light);"><strong>Пациент:</strong> ${b.patient_name} ${b.patient_surname}</p>
+                            </div>
+                        </div>
+                        <button class="btn" style="padding: 10px 20px; font-size: 14px;" onclick="openEditApptModal(${b.id})">${translations[currentLang].edit_btn}</button>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function openEditApptModal(id) {
+            const b = myBookings.find(x => x.id === id);
+            if(!b) return;
+            document.getElementById('editApptId').value = b.id;
+            document.getElementById('editApptDoctorId').value = b.doctor_id;
+            document.getElementById('editApptName').value = b.patient_name;
+            document.getElementById('editApptSurname').value = b.patient_surname;
+            document.getElementById('editApptPhone').value = b.phone;
+            document.getElementById('editApptDate').value = b.date.split('T')[0];
+            document.getElementById('editApptTime').value = b.time_slot;
+            document.getElementById('editApptModal').classList.add('active');
+        }
+
+        function closeEditModal() { document.getElementById('editApptModal').classList.remove('active'); }
+
+        async function saveEditAppt() {
+            const id = document.getElementById('editApptId').value;
+            const body = {
+                doctor_id: document.getElementById('editApptDoctorId').value,
+                patient_name: document.getElementById('editApptName').value,
+                patient_surname: document.getElementById('editApptSurname').value,
+                phone: document.getElementById('editApptPhone').value,
+                date: document.getElementById('editApptDate').value,
+                time_slot: document.getElementById('editApptTime').value
+            };
+            try {
+                const res = await fetch(`${API_BASE}/appointments/${id}`, {
+                    method: 'PUT', headers: {'Content-Type': 'application/json'}, body: JSON.stringify(body)
+                });
+                const responseData = await res.json();
+                if (res.ok) {
+                    closeEditModal();
+                    searchMyBookings(); // refresh
+                    alert("Успешно сохранено!");
+                } else {
+                    alert(responseData.error);
+                }
+            } catch(e){}
+        }
+
+        function setupPhoneMask(id) {
+            const input = document.getElementById(id);
+            if(!input) return;
+            input.addEventListener('input', function (e) {
+                let x = e.target.value.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})(\d{0,2})/);
+                if (!x[1]) { e.target.value = '+996 '; return; }
+                if(x[1] !== '996') { e.target.value = '+996 '; return; }
+                e.target.value = !x[2] ? '+996 ' : '+996 ' + x[2] + (x[3] ? ' ' + x[3] : '') + (x[4] ? ' ' + x[4] : '') + (x[5] ? ' ' + x[5] : '');
+            });
+            input.addEventListener('focus', function() { if(this.value === '') this.value = '+996 '; });
+        }
+
+        // Setup hook
+        document.addEventListener('DOMContentLoaded', async () => {
+            await fetchDoctors();
+            await fetchNurses();
+            renderAll(); // Updates the main pages (nurses, doctors grid)
+            setupPhoneMask('patientPhone');
+            setupPhoneMask('searchPhone');
+            setupPhoneMask('editApptPhone');
+        });
+    </script>
+</body>
+</html>
